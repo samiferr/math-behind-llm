@@ -1,0 +1,20 @@
+/* Styles for the EPUB edition */
+body { font-family: Georgia, "Times New Roman", serif; line-height: 1.55; margin: 0 4%; }
+h1, h2, h3, h4 { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; line-height: 1.25; }
+h1 { color: #2B6CB0; text-align: center; margin-top: 30%; font-size: 1.8em; }
+h2 { font-size: 1.5em; margin-top: 1.2em; page-break-before: always; }
+h3 { color: #2B6CB0; font-size: 1.15em; margin-top: 1.6em; }
+p { margin: 0.6em 0; }
+figure { margin: 1.2em 0; text-align: center; page-break-inside: avoid; }
+figure img, img { max-width: 100%; height: auto; }
+figcaption { font-size: 0.85em; font-style: italic; color: #555; margin-top: 0.4em; }
+blockquote { background: #F1F5FA; border-left: 4px solid #2B6CB0; margin: 1em 0; padding: 0.5em 1em; }
+blockquote p { margin: 0.4em 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85em; margin: 1em 0; }
+th, td { border: 1px solid #C9D6E3; padding: 0.3em 0.45em; vertical-align: top; text-align: left; }
+th { background: #F1F5FA; }
+code { font-family: "DejaVu Sans Mono", Menlo, monospace; font-size: 0.85em; }
+math[display="block"] { display: block; margin: 0.8em 0; overflow-x: auto; }
+.edition-page { font-size: 0.9em; margin-top: 2em; }
+.edition-page p { margin: 0.5em 0; }
+nav#toc ol { list-style: none; padding-left: 1em; }

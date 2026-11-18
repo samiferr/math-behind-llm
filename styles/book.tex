@@ -1,0 +1,67 @@
+% Extra LaTeX setup for the PDF edition (built with XeLaTeX).
+
+% ---- Fonts (XeLaTeX): TeX Gyre Pagella for text, Inter for headings.
+% Pagella lacks a few superscript/subscript letters (e.g. the x in e^x written
+% as a Unicode superscript), so those characters are borrowed from DejaVu Serif.
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Inter}[Scale=0.92]
+\setmonofont{DejaVu Sans Mono}[Scale=0.82]
+\newfontfamily\fallbackfont{DejaVu Serif}[Scale=0.9]
+\usepackage{newunicodechar}
+\newcommand{\fb}[1]{{\fallbackfont #1}}
+\newunicodechar{ˣ}{\fb{ˣ}}\newunicodechar{ᵀ}{\fb{ᵀ}}\newunicodechar{ᵐ}{\fb{ᵐ}}
+\newunicodechar{ᵢ}{\fb{ᵢ}}\newunicodechar{ᶻ}{\fb{ᶻ}}\newunicodechar{⁰}{\fb{⁰}}
+\newunicodechar{⁴}{\fb{⁴}}\newunicodechar{⁵}{\fb{⁵}}\newunicodechar{⁸}{\fb{⁸}}
+\newunicodechar{⁹}{\fb{⁹}}\newunicodechar{⁺}{\fb{⁺}}\newunicodechar{⁻}{\fb{⁻}}
+\newunicodechar{ⁿ}{\fb{ⁿ}}\newunicodechar{₀}{\fb{₀}}\newunicodechar{₁}{\fb{₁}}
+\newunicodechar{₂}{\fb{₂}}\newunicodechar{₃}{\fb{₃}}\newunicodechar{ₖ}{\fb{ₖ}}
+\newunicodechar{ⱼ}{\fb{ⱼ}}\newunicodechar{∇}{\fb{∇}}
+
+% ---- Colours
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{2B6CB0}
+\definecolor{boxbg}{HTML}{F1F5FA}
+\definecolor{rule}{HTML}{C9D6E3}
+
+% ---- Headings in the sans font, accent colour
+\usepackage{titlesec}
+\titleformat{\part}[display]{\centering\sffamily\bfseries\Huge\color{accent}}{}{0pt}{}
+\titleformat{\chapter}[display]{\sffamily\bfseries\huge}{}{0pt}{\raggedright}
+\titlespacing*{\chapter}{0pt}{0pt}{28pt}
+\titleformat{\section}{\sffamily\bfseries\Large\color{accent}}{}{0pt}{}
+\titleformat{\subsection}{\sffamily\bfseries\large}{}{0pt}{}
+\titlespacing*{\section}{0pt}{18pt}{8pt}
+
+% ---- Running headers and page numbers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{gray}\nouppercase{\leftmark}}
+\fancyhead[R]{\small\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\sffamily\thepage}\renewcommand{\headrulewidth}{0pt}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+% ---- Figures: captions already carry "Figure X.Y"; do not add a number
+\usepackage[labelformat=empty,font={small,it},skip=6pt]{caption}
+
+% ---- Callout boxes: every blockquote (Try it yourself, Developer note, ...)
+\usepackage[most]{tcolorbox}
+\tcbset{calloutstyle/.style={breakable, enhanced, colback=boxbg, colframe=boxbg,
+  borderline west={2.5pt}{0pt}{accent}, arc=2pt, boxrule=0pt,
+  left=10pt, right=8pt, top=6pt, bottom=6pt, before skip=10pt, after skip=10pt}}
+\renewenvironment{quote}{\begin{tcolorbox}[calloutstyle]}{\end{tcolorbox}}
+
+% ---- Tables a little smaller
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}
+\renewcommand{\arraystretch}{1.25}
+
+% ---- Paragraph spacing for a modern reading feel
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\raggedbottom
+
+% ---- Code blocks: smaller type, long lines wrap instead of running off the page
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\},fontsize=\footnotesize}

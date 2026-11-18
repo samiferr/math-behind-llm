@@ -1,0 +1,54 @@
+name: Build book
+
+# Builds the PDF and EPUB on every push to main (as downloadable artifacts) and
+# publishes a GitHub Release with both files whenever a version tag is pushed:
+#   git tag v1.0.0 && git push --tags
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pandoc, XeLaTeX and fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc qpdf python3-yaml \
+            texlive-xetex texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended fonts-texgyre fonts-dejavu fonts-inter
+
+      - name: Build PDF and EPUB
+        run: make all
+
+      - name: Read edition details
+        id: meta
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import sys; sys.path.insert(0, "scripts")
+          from build import load_meta
+          m = load_meta()
+          print(f"label={m['edition_label']}")
+          print(f"version={m['version']}")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: book-v${{ steps.meta.outputs.version }}
+          path: dist/*
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.meta.outputs.label }} (v${{ steps.meta.outputs.version }})
+          body_path: CHANGELOG.md
+          files: dist/*

@@ -1,0 +1,31 @@
+# Book metadata. The build reads this file; scripts/new_edition.py updates it.
+# Do not edit edition/version/date by hand when starting a new edition: run
+#   make new-edition      (next edition, e.g. 1.0.0 -> 2.0.0)
+#   make new-update       (additions within an edition, e.g. 1.0.0 -> 1.1.0)
+#   make new-revision     (corrections / reprint, e.g. 1.0.0 -> 1.0.1)
+
+title: The Math Behind Large Language Models
+subtitle: A step-by-step beginner's guide, from arithmetic to transformers
+author: Sam
+lang: en-CA
+slug: the-math-behind-llms
+
+# Edition tracking
+edition: 1
+version: 1.0.0
+date: 2026-11-18
+
+rights: All rights reserved.
+keywords: [large language models, mathematics, linear algebra, probability, calculus, transformers, machine learning]
+description: >-
+  A beginner's guide to the mathematics behind large language models: functions,
+  vectors, matrices, probability, entropy, derivatives, gradient descent, neural
+  networks, attention and transformers, each explained step by step with
+  real-world examples, charts and diagrams.
+
+# Edition history (newest last). scripts/new_edition.py appends to this list.
+history:
+  - version: 1.0.0
+    edition: 1
+    date: 2026-11-18
+    note: First edition.
